@@ -1,31 +1,83 @@
+/*eslint-disable no-unused-vars*/
 /* eslint-disable react/prop-types */
-function RecipeContainer({ recipe }) {
+import { useState } from "react";
+
+function RecipeContainer({ recipe, handleDelete }) {
+  const [tempRecp, setTempRecp] = useState(recipe);
+  const [isEdit, setIsEdit] = useState(false);
+
+  function handleEditClick() {
+    setIsEdit(!isEdit);
+  }
+
+  function handleChange(e, key) {
+    const nextRecipe = { ...tempRecp, [key]: e.target.value };
+    setTempRecp(nextRecipe);
+  }
   return (
     <>
       <div
         className="recipe-container"
         onClick={() => {
-          document.title = recipe.title;
+          document.title = tempRecp.title;
         }}
       >
         <div className="recipe">
-          <h2>{recipe.title}</h2>
+          <h2>{tempRecp.title}</h2>
           <p>
-            <strong>Description:</strong>
-            {recipe.description}
+            {isEdit ? (
+              <>
+                <textarea
+                  value={tempRecp.description}
+                  rows={4}
+                  cols={56}
+                  onChange={(e) => handleChange(e, "description")}
+                />
+              </>
+            ) : (
+              <>
+                <strong>Description:</strong>
+                {tempRecp.description ? tempRecp.description : "No description"}
+              </>
+            )}
           </p>
           <p>
-            <strong>Ingredients:</strong> {recipe.ingredients}
+            {isEdit ? (
+              <textarea
+                value={tempRecp.ingredients}
+                rows={16}
+                cols={56}
+                onChange={(e) => handleChange(e, "ingredients")}
+              />
+            ) : (
+              <>
+                <strong>Ingredients:</strong> {tempRecp.ingredients}
+              </>
+            )}
           </p>
           <p>
-            <strong>Directions:</strong> {recipe.directions}
+            {isEdit ? (
+              <textarea
+                value={tempRecp.directions}
+                rows={16}
+                cols={56}
+                onChange={(e) => handleChange(e, "directions")}
+              />
+            ) : (
+              <>
+                <strong>Directions:</strong> {tempRecp.directions}
+              </>
+            )}
           </p>
           <img
-            src={recipe.photoUrl}
-            alt={recipe.title}
+            src={tempRecp.photoUrl}
+            alt={tempRecp.title}
             width={300}
             height={300}
           />
+          <br />
+          <button onClick={handleEditClick}>{isEdit ? "Save" : "Edit"}</button>
+          <button onClick={handleDelete}>Delete</button>
         </div>
       </div>
     </>
