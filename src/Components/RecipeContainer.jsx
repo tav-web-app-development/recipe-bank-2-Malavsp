@@ -2,18 +2,22 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
-function RecipeContainer({ recipe, handleDelete }) {
+function RecipeContainer({ recipe, handleDelete, updateRecipe, index }) {
   const [tempRecp, setTempRecp] = useState(recipe);
   const [isEdit, setIsEdit] = useState(false);
 
   function handleEditClick() {
     setIsEdit(!isEdit);
+    if (isEdit) {
+      updateRecipe(tempRecp, index);
+    }
   }
 
   function handleChange(e, key) {
     const nextRecipe = { ...tempRecp, [key]: e.target.value };
     setTempRecp(nextRecipe);
   }
+
   return (
     <>
       <div

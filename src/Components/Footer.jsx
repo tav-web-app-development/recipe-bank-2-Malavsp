@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-function Footer({ reff }) {
+function Footer({ footerElement }) {
   return (
     <>
-      <div className="footer" ref={reff}>
+      <div className="footer" ref={footerElement}>
         <p>&copy; 2024 Recipe App. All rights reserved.</p>
       </div>
     </>

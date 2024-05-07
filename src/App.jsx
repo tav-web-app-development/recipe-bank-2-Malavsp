@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState, useMemo, useRef } from "react";
 import "./App.css";
+import { Outlet } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-import RecipeContainer from "./Components/RecipeContainer";
 import "./assets/style.css";
+import { LevelContext } from "./context/LevelContext";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -14,7 +15,7 @@ function App() {
     [recipes]
   );
 
-  const end = useRef(null);
+  const footerElement = useRef(null);
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -39,7 +40,7 @@ function App() {
   }
   // const filteredRecipes = filterRecipesComputeIntensive(recipes);
   function handleRef() {
-    end.current.scrollIntoView({
+    footerElement.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
@@ -51,17 +52,19 @@ function App() {
     setRecipes(nextRecipes);
   }
 
+  function updateRecipe(tempRecipe, i) {
+    console.log(tempRecipe);
+    const changedRecipe = [...recipes];
+    changedRecipe[i] = tempRecipe;
+    setRecipes(changedRecipe);
+  }
   return (
     <>
       <Navbar handleRef={handleRef} />
-      {recipes.map((data, index) => (
-        <RecipeContainer
-          recipe={data}
-          key={data.id}
-          handleDelete={() => handleDelete(index)}
-        />
-      ))}
-      <Footer reff={end} />
+      <LevelContext.Provider value={{ recipes, handleDelete, updateRecipe }}>
+        <Outlet />
+      </LevelContext.Provider>
+      <Footer footerElement={footerElement} />
     </>
   );
 }

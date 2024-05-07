@@ -6,7 +6,7 @@ body {
 }
 
 .navbar {
-  background-color: #333;
+  background-color: #ffd54f;
   color: #fff;
   padding: 10px 20px;
   display: flex;
@@ -17,8 +17,11 @@ body {
   margin: 0;
 }
 
+.links {
+  text-decoration: none;
+}
 .footer {
-  background-color: #333;
+  background-color: #ffd54f;
   color: #fff;
   text-align: center;
   padding: 10px 0;
@@ -50,4 +53,21 @@ body {
 
 .recipe p {
   margin-top: 0;
+}
+
+form {
+  border: 2px solid green;
+  margin: 6px;
+  background: #63efdd;
+}
+form div,
+button {
+  padding: 4px;
+  margin: 10px;
+  text-align: left;
+}
+
+form button {
+  border-radius: 6px;
+  background: #ada5c1;
 }

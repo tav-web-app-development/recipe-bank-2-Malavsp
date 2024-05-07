@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
 function Navbar({ handleRef }) {
   return (
@@ -5,24 +7,38 @@ function Navbar({ handleRef }) {
       <div className="navbar">
         <h1>Recipe App</h1>
         <nav>
-          <a
+          <Link
+            to=""
             onClick={handleRef}
             style={{ padding: "2px", border: "2px solid white" }}
           >
             End of Page
-          </a>
+          </Link>
           <ul>
             <li>
-              <a href="#">Home</a>
+              <Link to="" className="links">
+                Home
+              </Link>
             </li>
             <li>
-              <a href="#">Recipes</a>
+              <Link to="" className="links">
+                Recipes
+              </Link>
             </li>
             <li>
-              <a href="#">About</a>
+              <Link to="" className="links">
+                About
+              </Link>
             </li>
             <li>
-              <a href="#">Contact</a>
+              <Link to="/contact" className="links">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link to="/new" className="links">
+                Submit
+              </Link>
             </li>
           </ul>
         </nav>
